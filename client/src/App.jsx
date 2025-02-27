@@ -1,26 +1,10 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import axios from "axios";
+import "./index.css"
+import Home from "./pages/Home";
+
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [array, setArray] = useState([]);
-
-  const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:8080/api");
-    setArray(response.data.fruits);
-    console.log(response.data.fruits);
-  };
-
-  useEffect(() => {
-    fetchAPI();
-  }, []);
-
-  return (
-    <>
-      
-    </>
-  );
+  return <Home />
+  
 }
 
 export default App;
