@@ -6,11 +6,24 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import App from "./App";
+import "./index.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import MainLayout from "./layout/MainLayout";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route path="/" element={<App />} />)
+  createRoutesFromElements(
+    <>
+      {/* Routes dengan Layout */}
+      <Route path="/" element={<MainLayout />}> 
+        <Route index element={<Home />} />
+      </Route>
+      {/* Routes tanpa Layout */}
+      <Route path="/login" element={<Login />} /> 
+    </>
+  )
 );
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
