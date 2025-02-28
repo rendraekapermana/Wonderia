@@ -7,17 +7,24 @@ import {
 } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Home from "./pages/Home";
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-      </Route>
+      <>
+        {/* Routes dengan Layout */}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+        </Route>
+
+        {/* Routes tanpa Layout */}
+        <Route path="/login" element={<Login />} />
+      </>
     )
   );
+
   return <RouterProvider router={router} />;
-};
+}
 
 export default App;
