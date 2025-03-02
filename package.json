@@ -1,0 +1,15 @@
+{
+  "name": "wonderia",
+  "version": "1.0.0",
+  "description": "Wonderia Ticketing System is a full-stack web app for amusement park ticket bookings. Built with React.js, Vite, and Tailwind CSS, it offers a smooth user experience. The backend uses Node.js, Express.js, and MySQL for data management, with Supabase handling authentication and role-based access control.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}
