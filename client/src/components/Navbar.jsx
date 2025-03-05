@@ -32,10 +32,10 @@ const Navbar = () => {
 
         <ul id="navbar-auth" className="flex flex-row gap-4">
           <li className="px-6 py-2 border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-all">
-            <a href="/login">Login</a>
+            <a href="../pages/Login.jsx">Login</a>
           </li>
           <li className="bg-[#975DC1] text-white px-6 py-2 border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-all">
-            <a href="/register">Create free account</a>
+            <a href="../pages/Register.jsx">Create free account</a>
           </li>
         </ul>
       </div>
