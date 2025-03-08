@@ -4,10 +4,11 @@ import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import dotenv from "dotenv";
 import Ticket from "../models/Ticket.js";
+import { verifyToken, isAdmin } from "../middlewares/authMiddleware.js";
+
 
 dotenv.config();
 
-const router = express.Router(); // Pastikan router dideklarasikan di awal
 
 // Konfigurasi Cloudinary
 cloudinary.config({
@@ -28,27 +29,28 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage });
 
 // Route untuk menambahkan tiket dengan gambar
-router.post("/", upload.single("image"), async (req, res) => {
-  try {
-    const { name, price, category } = req.body;
+const router = express.Router();
+// router.post("/", upload.single("image"), async (req, res) => {
+//   try {
+//     const { name, price, category } = req.body;
 
-    if (!req.file) {
-      return res.status(400).json({ message: "Image is required" });
-    }
+//     if (!req.file) {
+//       return res.status(400).json({ message: "Image is required" });
+//     }
 
-    const newTicket = new Ticket({
-      name,
-      price,
-      category,
-      image: req.file.path || req.file.secure_url, // Pastikan ambil secure_url dari Cloudinary
-    });
+//     const newTicket = new Ticket({
+//       name,
+//       price,
+//       category,
+//       image: req.file.path || req.file.secure_url, // Pastikan ambil secure_url dari Cloudinary
+//     });
 
-    await newTicket.save();
-    res.status(201).json(newTicket);
-  } catch (error) {
-    res.status(500).json({ message: "Error adding ticket", error });
-  }
-});
+//     await newTicket.save();
+//     res.status(201).json(newTicket);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error adding ticket", error });
+//   }
+// });
 
 // Get all tickets
 router.get("/", async (req, res) => {
@@ -102,5 +104,30 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+
+// Contoh: Hanya admin yang bisa membuat tiket baru
+router.post("/", verifyToken, isAdmin, async (req, res) => {
+  try {
+    const { name, price, category, image } = req.body;
+    const newTicket = new Ticket({ name, price, category, image });
+    await newTicket.save();
+    res.json(newTicket);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+// Contoh: User biasa bisa melihat tiket
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const tickets = await Ticket.find();
+    res.json(tickets);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 export default router;

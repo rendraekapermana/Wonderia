@@ -1,12 +1,42 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // State untuk menampilkan pesan error
+  const navigate = useNavigate(); // Untuk navigasi ke halaman lain
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email, "Password:", password);
+    setError(""); // Reset error sebelum request baru
+
+    console.log("Data yang dikirim:", { email, password }); // Debugging
+
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      console.log("Status Response:", response.status); // Debugging status
+      const data = await response.json();
+      console.log("Response dari server:", data); // Debugging response
+
+      if (!response.ok) {
+        throw new Error(data.message || "Email atau password salah");
+      }
+
+      alert("Login berhasil!");
+      navigate("/DetailTicket");
+    } catch (err) {
+      console.error("Error login:", err.message); // Debugging error
+      setError(err.message); // Menampilkan error jika login gagal
+    }
   };
 
   return (
@@ -40,10 +70,14 @@ const Login = () => {
               required
             />
           </div>
+
+          {/* Menampilkan pesan error jika login gagal */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
           <div className="text-right">
-            <a href="#" className="text-blue-500 text-sm">
+            <Link href="#" className="text-blue-500 text-sm">
               Forgot password?
-            </a>
+            </Link>
           </div>
           <button
             type="submit"
@@ -55,10 +89,10 @@ const Login = () => {
 
         <p className="mt-4">
           Dont have an account?
-          <a href="#" className="text-blue-500">
+          <Link to="/Register" className="text-blue-500">
             {" "}
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
 

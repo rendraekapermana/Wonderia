@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+
+
 
 const Navbar = () => {
   return (
@@ -32,10 +35,10 @@ const Navbar = () => {
 
         <ul id="navbar-auth" className="flex flex-row gap-4">
           <li className="px-6 py-2 border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-all">
-            <a href="../pages/Login.jsx">Login</a>
+            <Link to="/login">Login</Link>
           </li>
           <li className="bg-[#975DC1] text-white px-6 py-2 border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-all">
-            <a href="../pages/Register.jsx">Create free account</a>
+            <Link to="/register">Create free account</Link>
           </li>
         </ul>
       </div>
