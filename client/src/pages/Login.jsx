@@ -89,7 +89,7 @@ const Login = () => {
 
         <p className="mt-4">
           Dont have an account?
-          <Link href="./Register" className="text-blue-500">
+          <Link to="/Register" className="text-blue-500">
             {" "}
             Sign Up
           </Link>

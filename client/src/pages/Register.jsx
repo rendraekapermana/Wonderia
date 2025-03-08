@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -107,10 +108,10 @@ const Register = () => {
 
         <p className="mt-4">
           Already have an account?
-          <a href="./Login" className="text-blue-500">
+          <Link to="/Login" className="text-blue-500">
             {" "}
             Login
-          </a>
+          </Link>
         </p>
       </div>
 
