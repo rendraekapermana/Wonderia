@@ -7,6 +7,7 @@ import {
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 
+
 const DetailTicket = () => {
   return (
     <div id="detail-ticket" className="w-[90%] max-w-[1350px] mx-auto my-12">
