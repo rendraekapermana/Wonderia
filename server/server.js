@@ -5,7 +5,8 @@ import dotenv from "dotenv";
 import multer from "multer";
 import cloudinary from "cloudinary";
 import Ticket from "./models/Ticket.js"; // Pastikan impor model Ticket
-import ticketRoutes from "./routes/ticketsRoutes.js"; // Pastikan path benar
+import ticketRoutes from "./routes/ticketsRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -85,3 +86,7 @@ mongoose
     );
   })
   .catch((error) => console.log(error));
+
+  // Rute
+app.use("/api/auth", authRoutes);
+app.use("/api/tickets", ticketRoutes); // Contoh rute tiket
