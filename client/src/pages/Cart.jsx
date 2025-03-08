@@ -47,9 +47,12 @@ const Cart = () => {
   );
 
   return (
-    <div className="min-h-screen px-20 py-12 font-[Inter]">
-      <h1 className="text-4xl text-center font-semibold mb-16">Shopping Cart</h1>
-      <ul className="flex flex-row space-x-60 pl-30 pb-5 text-2xl font-medium">
+    <div className="min-h-screen px-4 md:px-20 py-12 font-[Inter]">
+
+      <h1 className="text-2xl md:text-4xl text-center font-semibold mb-8">Shopping Cart</h1>
+
+      <ul className="flex flex-col gap-20 md:flex-row space-y-4 md:space-y-0 md:space-x-20 pl-0 md:pl-30 pb-5 text-lg md:text-2xl font-medium">
+
         <li>Product</li>
         <li>Price</li>
         <li>Quantity</li>
@@ -68,37 +71,40 @@ const Cart = () => {
             {cartItems.map((item) => (
               <li
                 key={item.id}
-                className="flex items-center border-b border-border py-2 gap-10"
+                className="flex flex-col md:flex-row items-center border-b border-border py-2 gap-4 md:gap-10"
+
               >
                 <div id="cart-product">
                   <h2 className="text-lg font-semibold">{item.name}</h2>
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-80 h-28 rounded-2xl shadow-[0px_5px_8px_rgba(0,0,0,0.25)]"
+                  className="w-full md:w-80 h-auto rounded-2xl shadow-[0px_5px_8px_rgba(0,0,0,0.25)]"
+
                   />
                 </div>
                 <div>
-                  <p className="text-gray-600">
+                  <p id="cart-price" className="text-gray-600">
                     {formatRupiah(item.price)} per ticket
                   </p>
                 </div>
-                <div className="flex items-center mt-2 mx-38">
-                  <button
+                <div className="flex items-center mt-2">
+
+                  <button id="cart-quantity"
                     onClick={() => handleQuantityChange(item.id, -1)}
                     className="px-2 py-1 bg-gray-300 rounded"
                   >
                     -
                   </button>
                   <span className="mx-3">{item.quantity}</span>
-                  <button
+                  <button id="cart-quantity"
                     onClick={() => handleQuantityChange(item.id, 1)}
                     className="px-2 py-1 bg-gray-300 rounded"
                   >
                     +
                   </button>
                 </div>
-                <p className="text-lg font-semibold mx-5">
+                <p id="cart-total" className="text-lg font-semibold mx-5">
                   {formatRupiah(item.price * item.quantity)}
                 </p>
               </li>
@@ -106,7 +112,8 @@ const Cart = () => {
           </ul>
         </div>
       )}
-      <div className="mt-6 text-left flex justify-end">
+        <div className="mt-6 text-left flex justify-end">
+
         <div className="border border-border px-8 py-4 w-fit rounded-lg shadow-[0px_3px_5px_rgba(0,0,0,0.25)]">
           <h2 className="text-md font-semibold">
             Total:{" "}
