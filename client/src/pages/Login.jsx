@@ -40,12 +40,18 @@ const Login = () => {
   };
 
   return (
-    <div id="login" className="flex h-screen">
-      {/* Container untuk form login (di kiri) */}
-      <div
-        id="login-container"
-        className="w-1/2 flex flex-col justify-center items-center p-8"
-      >
+    <div id="login" className="flex flex-col lg:flex-row h-screen">
+      {/* Gambar di atas (mobile/tablet) atau di samping kanan (desktop) */}
+      <div className="w-full lg:w-1/2">
+        <img
+          src="https://ihqqppufevqblzjtbdrn.supabase.co/storage/v1/object/sign/DetailTicket/login%20background.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJEZXRhaWxUaWNrZXQvbG9naW4gYmFja2dyb3VuZC5qcGciLCJpYXQiOjE3NDA4ODY3NDksImV4cCI6MTc3MjQyMjc0OX0.V225MvT--60I__-_Uy9nxYOMfZfbQFfGrANAQHXztZY"
+          alt="Login Background"
+          className="w-full h-full md:h-full lg:h-full object-cover"
+        />
+      </div>
+
+      {/* Container Form Login */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8">
         <h1 className="text-3xl font-bold mb-6">Get Started Now</h1>
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
           <div>
@@ -75,7 +81,7 @@ const Login = () => {
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <div className="text-right">
-            <Link href="#" className="text-blue-500 text-sm">
+            <Link to="#" className="text-blue-500 text-sm">
               Forgot password?
             </Link>
           </div>
@@ -94,15 +100,6 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
-      </div>
-
-      {/* Container untuk gambar (di kanan) */}
-      <div className="w-1/2 flex justify-end">
-        <img
-          src="https://ihqqppufevqblzjtbdrn.supabase.co/storage/v1/object/sign/DetailTicket/login%20background.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJEZXRhaWxUaWNrZXQvbG9naW4gYmFja2dyb3VuZC5qcGciLCJpYXQiOjE3NDA4ODY3NDksImV4cCI6MTc3MjQyMjc0OX0.V225MvT--60I__-_Uy9nxYOMfZfbQFfGrANAQHXztZY"
-          alt="Login Background"
-          className="w-full h-full object-cover"
-        />
       </div>
     </div>
   );

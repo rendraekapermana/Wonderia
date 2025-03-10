@@ -46,9 +46,21 @@ const Register = () => {
   };
 
   return (
-    <div id="register" className="flex h-screen">
-      <div className="w-1/2 flex flex-col justify-center items-center p-8">
-        <h1 className="text-3xl font-bold mb-6">Create Your Account</h1>
+    <div id="register" className="flex flex-col lg:flex-row min-h-screen">
+      {/* Gambar (Atas di Mobile, Samping di Desktop) */}
+      <div className="w-full lg:w-1/2">
+        <img
+          src="https://ihqqppufevqblzjtbdrn.supabase.co/storage/v1/object/sign/DetailTicket/login%20background.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJEZXRhaWxUaWNrZXQvbG9naW4gYmFja2dyb3VuZC5qcGciLCJpYXQiOjE3NDA4ODY3NDksImV4cCI6MTc3MjQyMjc0OX0.V225MvT--60I__-_Uy9nxYOMfZfbQFfGrANAQHXztZY"
+          alt="Register Background"
+          className="w-full h-64 md:h-80 lg:h-full object-cover"
+        />
+      </div>
+
+      {/* Form Register */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 md:p-8 lg:p-12">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">
+          Create Your Account
+        </h1>
 
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
@@ -106,22 +118,13 @@ const Register = () => {
           </button>
         </form>
 
-        <p className="mt-4">
+        <p className="mt-4 text-center">
           Already have an account?
           <Link to="/Login" className="text-blue-500">
             {" "}
             Login
           </Link>
         </p>
-      </div>
-
-      {/* Gambar di sebelah kanan */}
-      <div className="w-1/2 flex justify-end">
-        <img
-          src="https://ihqqppufevqblzjtbdrn.supabase.co/storage/v1/object/sign/DetailTicket/login%20background.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJEZXRhaWxUaWNrZXQvbG9naW4gYmFja2dyb3VuZC5qcGciLCJpYXQiOjE3NDA4ODY3NDksImV4cCI6MTc3MjQyMjc0OX0.V225MvT--60I__-_Uy9nxYOMfZfbQFfGrANAQHXztZY"
-          alt="Register Background"
-          className="w-full h-full object-cover"
-        />
       </div>
     </div>
   );
