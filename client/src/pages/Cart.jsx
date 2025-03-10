@@ -20,7 +20,6 @@ const Cart = () => {
     },
   ]);
 
-  // Fungsi untuk format mata uang Rupiah
   const formatRupiah = (value) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -29,15 +28,12 @@ const Cart = () => {
   };
 
   const handleQuantityChange = (id, amount) => {
-    setCartItems(
-      (prevItems) =>
-        prevItems
-          .map((item) =>
-            item.id === id
-              ? { ...item, quantity: item.quantity + amount }
-              : item
-          )
-          .filter((item) => item.quantity > 0) // Menghapus item jika jumlahnya nol
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + amount } : item
+        )
+        .filter((item) => item.quantity > 0)
     );
   };
 
@@ -47,18 +43,10 @@ const Cart = () => {
   );
 
   return (
-    <div className="min-h-screen px-4 md:px-20 py-12 font-[Inter]">
-
-      <h1 className="text-2xl md:text-4xl text-center font-semibold mb-8">Shopping Cart</h1>
-
-      <ul className="flex flex-col gap-20 md:flex-row space-y-4 md:space-y-0 md:space-x-20 pl-0 md:pl-30 pb-5 text-lg md:text-2xl font-medium">
-
-        <li>Product</li>
-        <li>Price</li>
-        <li>Quantity</li>
-        <li>Total</li>
-      </ul>
-
+    <div className="min-h-screen px-4 md:px-12 lg:px-20 py-12 font-[Inter]">
+      <h1 className="text-2xl md:text-4xl text-center font-semibold mb-8">
+        Shopping Cart
+      </h1>
       {cartItems.length === 0 ? (
         <div className="flex flex-col justify-center items-center my-42">
           <p className="text-4xl text-center font-semibold mb-6 text-gray-500">
@@ -66,56 +54,73 @@ const Cart = () => {
           </p>
         </div>
       ) : (
-        <div className="bg-white p-6 rounded-lg shadow-md border border-border">
-          <ul>
-            {cartItems.map((item) => (
-              <li
-                key={item.id}
-                className="flex flex-col md:flex-row items-center border-b border-border py-2 gap-4 md:gap-10"
+        <div className="bg-white p-6 rounded-lg shadow-md border border-border overflow-x-auto">
+          {/* Header: Disembunyikan di Phone */}
+          <table className="w-full border-collapse">
+            <thead className="hidden md:table-header-group">
+              <tr className="text-left border-b">
+                <th className="p-4 text-lg">Product</th>
+                <th className="p-4 text-lg text-center">Price</th>
+                <th className="p-4 text-lg text-center">Quantity</th>
+                <th className="p-4 text-lg text-center">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item) => (
+                <tr
+                  key={item.id}
+                  className="border-b text-center flex flex-col md:table-row"
+                >
+                  {/* Product */}
+                  <td className="flex flex-col items-center md:items-start gap-2 p-4 text-center md:text-left">
+                    <span className="text-lg font-semibold">{item.name}</span>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full md:w-80 h-auto rounded-2xl shadow-[0px_5px_8px_rgba(0,0,0,0.25)]"
+                    />
+                  </td>
 
-              >
-                <div id="cart-product">
-                  <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                  className="w-full md:w-80 h-auto rounded-2xl shadow-[0px_5px_8px_rgba(0,0,0,0.25)]"
+                  {/* Price */}
+                  <td className="p-4 text-center md:table-cell whitespace-nowrap text-lg md:text-base font-semibold">
+                    {formatRupiah(item.price)}
+                  </td>
 
-                  />
-                </div>
-                <div>
-                  <p id="cart-price" className="text-gray-600">
-                    {formatRupiah(item.price)} per ticket
-                  </p>
-                </div>
-                <div className="flex items-center mt-2">
+                  {/* Quantity */}
+                  <td className="p-4 flex justify-center md:table-cell items-center gap-2 sm:gap-4">
+                    <button
+                      onClick={() => handleQuantityChange(item.id, -1)}
+                      className="px-2 py-1 sm:px-2 sm:py-1 bg-gray-300 rounded"
+                    >
+                      -
+                    </button>
 
-                  <button id="cart-quantity"
-                    onClick={() => handleQuantityChange(item.id, -1)}
-                    className="px-2 py-1 bg-gray-300 rounded"
-                  >
-                    -
-                  </button>
-                  <span className="mx-3">{item.quantity}</span>
-                  <button id="cart-quantity"
-                    onClick={() => handleQuantityChange(item.id, 1)}
-                    className="px-2 py-1 bg-gray-300 rounded"
-                  >
-                    +
-                  </button>
-                </div>
-                <p id="cart-total" className="text-lg font-semibold mx-5">
-                  {formatRupiah(item.price * item.quantity)}
-                </p>
-              </li>
-            ))}
-          </ul>
+                    <span className="text-lg font-semibold mx-2 sm:mx-1">
+                      {item.quantity}
+                    </span>
+
+                    <button
+                      onClick={() => handleQuantityChange(item.id, 1)}
+                      className="px-2 py-1 sm:px-2 sm:py-1 bg-gray-300 rounded"
+                    >
+                      +
+                    </button>
+                  </td>
+
+                  {/* Total */}
+                  <td className="p-4 font-semibold text-center md:table-cell whitespace-nowrap text-lg md:text-base">
+                    {formatRupiah(item.price * item.quantity)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
-        <div className="mt-6 text-left flex justify-end">
-
-        <div className="border border-border px-8 py-4 w-fit rounded-lg shadow-[0px_3px_5px_rgba(0,0,0,0.25)]">
-          <h2 className="text-md font-semibold">
+      {/* Total Price */}
+      <div className="mt-6 flex justify-center md:justify-end">
+        <div className="border border-border px-8 py-4 w-fit rounded-lg shadow-md text-center">
+          <h2 className="text-lg md:text-md font-semibold">
             Total:{" "}
             <span className="text-black">{formatRupiah(totalPrice)}</span>
           </h2>
